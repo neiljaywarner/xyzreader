@@ -24,9 +24,9 @@ public class UpdaterService extends IntentService {
     private static final String TAG = "UpdaterService";
 
     public static final String BROADCAST_ACTION_STATE_CHANGE
-            = "com.example.xyzreader.intent.action.STATE_CHANGE";
+            = "com.neiljaywarner.xyzreader.intent.action.STATE_CHANGE";
     public static final String EXTRA_REFRESHING
-            = "com.example.xyzreader.intent.extra.REFRESHING";
+            = "com.neiljaywarner.xyzreader.intent.extra.REFRESHING";
 
     public UpdaterService() {
         super(TAG);
