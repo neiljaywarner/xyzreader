@@ -92,6 +92,7 @@
         </FrameLayout>
     </com.example.xyzreader.ui.ObservableScrollView>
 
+
     <ImageButton android:id="@+id/share_fab"
         android:stateListAnimator="@anim/fab_state_list_anim"
         android:background="@drawable/add_fab_background"
@@ -103,5 +104,7 @@
         android:src="@drawable/ic_share"
         android:elevation="@dimen/fab_elevation"
         android:contentDescription="@string/action_share" />
+
+
 
 </com.example.xyzreader.ui.DrawInsetsFrameLayout>
