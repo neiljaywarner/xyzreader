@@ -32,7 +32,6 @@
 
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/TransparentActionBar</item>
-        <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
