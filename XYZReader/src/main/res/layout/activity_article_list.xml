@@ -20,7 +20,13 @@
             android:paddingBottom="28dp" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-        <android.support.v7.widget.Toolbar
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:layout_marginLeft="@dimen/list_toolbar_side_margin"
@@ -28,5 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_gravity="bottom"/>
+
+    </android.support.design.widget.AppBarLayout>
 
 </FrameLayout>
