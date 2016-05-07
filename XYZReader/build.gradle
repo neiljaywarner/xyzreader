@@ -18,7 +18,8 @@ android {
 
     defaultConfig {
         applicationId "com.neiljaywarner.xyzreader"
-        minSdkVersion 16
+        minSdkVersion 21
+        // 43% as of May 2016.. Could be better...
         targetSdkVersion 23
     }
 }

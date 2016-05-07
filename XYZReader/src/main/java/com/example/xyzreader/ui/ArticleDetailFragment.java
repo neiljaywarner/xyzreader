@@ -40,20 +40,13 @@ public class ArticleDetailFragment extends Fragment implements
     private static final String TAG = ArticleDetailFragment.class.getSimpleName();
 
     public static final String ARG_ITEM_ID = "item_id";
-    private static final float PARALLAX_FACTOR = 1.25f;
 
     private Cursor mCursor;
     private long mItemId;
     private View mRootView;
     private int mMutedColor = 0xFF333333;
-    private ObservableScrollView mScrollView;
-    private DrawInsetsFrameLayout mDrawInsetsFrameLayout;
-    private ColorDrawable mStatusBarColorDrawable;
 
-    private int mTopInset;
-    private View mPhotoContainerView;
     private ImageView mPhotoView;
-    private int mScrollY;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -99,13 +92,6 @@ public class ArticleDetailFragment extends Fragment implements
 
 
         mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
-        mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
-        Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
-
-       // AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-      //  appCompatActivity.setSupportActionBar(toolbar);
-
-        mStatusBarColorDrawable = new ColorDrawable(0);
 
         mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +138,11 @@ public class ArticleDetailFragment extends Fragment implements
                             Bitmap bitmap = imageContainer.getBitmap();
                             if (bitmap != null) {
                                 Palette p = Palette.from(bitmap).generate();
-                                mMutedColor = p.getDarkMutedColor(0xFF333333);
+                                mMutedColor = p.getLightMutedColor(0xFF333333);
+                                if (p.getLightMutedSwatch() != null)
+                                {
+                                    mMutedColor = p.getLightMutedSwatch().getRgb();
+                                }
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
                                 mRootView.findViewById(R.id.meta_bar)
                                         .setBackgroundColor(mMutedColor);
