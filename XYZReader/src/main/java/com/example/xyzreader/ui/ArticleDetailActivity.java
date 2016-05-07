@@ -42,10 +42,6 @@ public class ArticleDetailActivity extends AppCompatActivity
                             View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
         setContentView(R.layout.activity_article_detail);
-    //    setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
         getLoaderManager().initLoader(0, null, this);
 
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
