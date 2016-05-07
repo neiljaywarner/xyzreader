@@ -102,8 +102,8 @@ public class ArticleDetailFragment extends Fragment implements
         mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
 
-        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-        appCompatActivity.setSupportActionBar(toolbar);
+       // AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+      //  appCompatActivity.setSupportActionBar(toolbar);
 
         mStatusBarColorDrawable = new ColorDrawable(0);
 

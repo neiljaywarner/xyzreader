@@ -8,7 +8,7 @@
     <android.support.v7.widget.Toolbar
         app:layout_scrollFlags="scroll|enterAlways"
         android:id="@+id/toolbar"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:theme="@style/TransparentActionBar"
         android:layout_marginLeft="@dimen/list_toolbar_side_margin"
         android:layout_marginRight="@dimen/list_toolbar_side_margin"
         android:layout_width="match_parent"
