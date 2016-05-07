@@ -6,15 +6,9 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
@@ -47,6 +41,9 @@ public class ArticleDetailFragment extends Fragment implements
     private int mMutedColor = 0xFF333333;
 
     private ImageView mPhotoView;
+    private TextView mTitleView;
+    private TextView mByLineView;
+    private TextView mBodyView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -93,17 +90,27 @@ public class ArticleDetailFragment extends Fragment implements
 
         mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
 
+        mTitleView = (TextView) mRootView.findViewById(R.id.article_title);
+        mByLineView = (TextView) mRootView.findViewById(R.id.article_byline);
+        mByLineView.setMovementMethod(new LinkMovementMethod());
+        mBodyView = (TextView) mRootView.findViewById(R.id.article_body);
+
+
+        bindViews();
+
+
         mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String shareBodyText = mBodyView.getText().toString() + "\n------------\nShared from:" + getString(R.string.app_name);
+
                 startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
-                        .setType("text/plain")
-                        .setText("Some sample text")
+                        .setType("text/html")
+                        .setSubject(mTitleView.getText().toString())
+                        .setText(shareBodyText)
                         .getIntent(), getString(R.string.action_share)));
             }
         });
-
-        bindViews();
         return mRootView;
     }
 
@@ -112,17 +119,13 @@ public class ArticleDetailFragment extends Fragment implements
             return;
         }
 
-        TextView titleView = (TextView) mRootView.findViewById(R.id.article_title);
-        TextView bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
-        bylineView.setMovementMethod(new LinkMovementMethod());
-        TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
 
         if (mCursor != null) {
             mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
             mRootView.animate().alpha(1);
-            titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
-            bylineView.setText(Html.fromHtml(
+            mTitleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
+            mByLineView.setText(Html.fromHtml(
                     DateUtils.getRelativeTimeSpanString(
                             mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
                             System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
@@ -130,7 +133,7 @@ public class ArticleDetailFragment extends Fragment implements
                             + " by <font color='#ffffff'>"
                             + mCursor.getString(ArticleLoader.Query.AUTHOR)
                             + "</font>"));
-            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
+            mBodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
             ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
                     .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
                         @Override
@@ -168,9 +171,9 @@ public class ArticleDetailFragment extends Fragment implements
                     });
         } else {
             mRootView.setVisibility(View.GONE);
-            titleView.setText("N/A");
-            bylineView.setText("N/A" );
-            bodyView.setText("N/A");
+            mTitleView.setText("N/A");
+            mByLineView.setText("N/A" );
+            mBodyView.setText("N/A");
         }
     }
 
